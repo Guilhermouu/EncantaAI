@@ -1,6 +1,14 @@
-// Em: src/models/user_model.js
-
 const db = require('../config/database');
+
+const findByCpf = (cpf) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM cliente WHERE cpf = ?';
+        db.get(sql, [cpf], (err, row) => {
+            if (err) return reject(err);
+            resolve(row);
+        });
+    });
+};
 
 const findByEmail = (email) => {
     return new Promise((resolve, reject) => {
@@ -8,16 +16,6 @@ const findByEmail = (email) => {
         db.get(sql, [email], (err, row) => {
             if (err) return reject(err);
             resolve(row);
-        });
-    });
-};
-
-const create = (email, hashedPassword) => {
-    return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO cliente (email, senha) VALUES (?, ?)';
-        db.run(sql, [email, hashedPassword], function(err) {
-            if (err) return reject(err);
-            resolve({ id: this.lastID });
         });
     });
 };
@@ -68,6 +66,23 @@ const deleteToken = (token) => {
     });
 };
 
+const create = (userData) => {
+    return new Promise((resolve, reject) => {
+        const { nome, cpf, email, hashedPassword, cep, rua, numero, bairro, cidade, estado, complemento } = userData;
+        
+        const sql = `
+            INSERT INTO cliente (nome, cpf, email, senha, cep, rua, numero, bairro, cidade, estado, complemento)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        
+        const params = [nome, cpf, email, hashedPassword, cep, rua, numero, bairro, cidade, estado, complemento];
+        
+        db.run(sql, params, function(err) {
+            if (err) return reject(err);
+            resolve({ id: this.lastID });
+        });
+    });
+};
 
 module.exports = {
     findByEmail,
@@ -76,4 +91,6 @@ module.exports = {
     findUserByValidToken,
     updatePassword,
     deleteToken,
+    findByCpf,
+    create
 };

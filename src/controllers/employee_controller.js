@@ -1,5 +1,3 @@
-// Em: src/controllers/employee_controller.js
-
 const bcrypt = require('bcrypt');
 const EmployeeModel = require('../models/employee_model');
 

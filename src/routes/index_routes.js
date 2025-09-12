@@ -14,7 +14,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Controladores
-const authController = require('../controllers/auth_controller')
+const authController = require('../controllers/auth_controllers')
 const productController = require('../controllers/product_controller')
 const cartController = require('../controllers/cart_controller')
 const employeeController= require('../controllers/employee_controller')
@@ -25,7 +25,7 @@ router.post('/api/login', authController.loginClient);
 
 // ROTAS DE CARRINHO ===
 router.post('/api/produto', productController.getProductsByCategory);
-router.post('/api/produto/administrador', productController.upload.single("foto"))
+// router.post('/api/produto/administrador', productController.upload.single("foto"))
 
 // === ROTAS DE CARRINHO ===
 router.get('/carrinho', cartController.viewCart);

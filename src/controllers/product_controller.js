@@ -1,5 +1,3 @@
-// Em: src/controllers/product_controller.js
-
 const ProductModel = require('../models/product_model');
 
 const getProductsByCategory = async (req, res) => {

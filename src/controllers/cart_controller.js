@@ -1,5 +1,3 @@
-// Em: src/controllers/cart_controller.js
-
 const CartModel = require('../models/cart_model');
 const ProductModel = require('../models/product_model'); // O controller precisa verificar se o produto existe
 

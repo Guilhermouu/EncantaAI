@@ -1,26 +1,49 @@
 // Em: src/controllers/auth_controller.js
 
 const bcrypt = require('bcrypt');
-const db = require('../config/database');
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const UserModel=require('../models/user_model')
 
 // Função de cadastro 
 const registerClient = async (req, res) => {
-    const { email, senha } = req.body;
-    if (!email || !senha) {
-        return res.status(400).json({ success: false, message: 'E-mail e senha são obrigatórios.' });
+    // 1. Recebe todos os novos campos do corpo da requisição
+    const { nome, cpf, email, senha, cep, rua, numero, bairro, cidade, estado, complemento } = req.body;
+
+    // 2. Validação de back-end (mínimo necessário)
+    if (!nome || !cpf || !email || !senha) {
+        return res.status(400).json({ success: false, message: 'Campos obrigatórios (nome, cpf, email, senha) não foram preenchidos.' });
     }
+
     try {
-        const existingUser = await UserModel.findByEmail(email);
-        if (existingUser) {
-            return res.status(409).json({ success: false, message: 'E-mail já está cadastrado.' });
+        // 3. Verifica se e-mail OU CPF já existem no banco
+        const existingUserByEmail = await UserModel.findByEmail(email);
+        if (existingUserByEmail) {
+            return res.status(409).json({ success: false, message: 'Este e-mail já está cadastrado.' });
         }
+        
+        const cpfNumeros = cpf.replace(/\D/g, ''); // Limpa a máscara do CPF
+        const existingUserByCpf = await UserModel.findByCpf(cpfNumeros);
+        if (existingUserByCpf) {
+            return res.status(409).json({ success: false, message: 'Este CPF já está cadastrado.' });
+        }
+
         const hashedPassword = await bcrypt.hash(senha, 10);
-        const newUser = await UserModel.create(email, hashedPassword);
+
+        // 4. Monta o objeto de dados para enviar ao Model
+        const userData = {
+            nome,
+            cpf: cpfNumeros, // Salva o CPF sem máscara
+            email,
+            hashedPassword,
+            cep, rua, numero, bairro, cidade, estado, complemento
+        };
+        
+        const newUser = await UserModel.create(userData);
+
         console.log(`Usuário ${email} cadastrado com ID: ${newUser.id}`);
         res.status(201).json({ success: true, message: 'Usuário cadastrado com sucesso!' });
+
     } catch (error) {
         console.error('Erro no processo de cadastro:', error.message);
         res.status(500).json({ success: false, message: 'Erro interno do servidor.' });

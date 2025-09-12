@@ -1,5 +1,3 @@
-// Em: src/models/employee_model.js
-
 const db = require('../config/database');
 
 const findByCpf = (cpf) => {

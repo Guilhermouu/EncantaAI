@@ -1,5 +1,3 @@
-// Em: src/models/cart_model.js
-
 const db = require('../config/database');
 
 const findAll = () => {

@@ -20,5 +20,5 @@ app.use('/', mainRoutes);
 
 // Inicia o servidor
 app.listen(PORT, () => {
-    console.log(`Aplicação rodando em: http://localhost:${PORT}/home.html`);
+    console.log(`Aplicação rodando em: http://localhost:${PORT}/index.html`);
 });
