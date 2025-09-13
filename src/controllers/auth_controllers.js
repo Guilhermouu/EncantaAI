@@ -1,5 +1,4 @@
-// Em: src/controllers/auth_controller.js
-
+// Importa as dependências necessárias
 const bcrypt = require('bcrypt');
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
@@ -90,7 +89,7 @@ const forgotPassword = async (req, res) => {
         const resetLink = `http://localhost:3000/resetar-senha.html?token=${token}`;
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com", port: 587, secure: false,
-            auth: { user: "guiprogramadore@gmail.com", pass: "rxid uqrl vngy nakw" }
+            auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
         });
 
         await transporter.sendMail({

@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 messageDiv.className = 'mensagem sucesso';
 
                 setTimeout(() => {
-                    window.location.href = '/telas/login/tela_login.html';
+                    window.location.href = 'login.html';
                 }, 2000);
             } else {
                 messageDiv.textContent = data.message || 'Erro ao cadastrar. Tente novamente.';

@@ -1,3 +1,4 @@
+// Funções do header (menu lateral e barra de pesquisa) 
 export function HeaderFuncoes() {
   document.addEventListener('DOMContentLoaded', () => {
     const menuContainer = document.querySelector('.menu-container');
