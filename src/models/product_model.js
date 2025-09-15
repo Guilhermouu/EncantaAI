@@ -39,18 +39,23 @@ const findColorsByName = (name) => {
         });
     });
 };
-// Criar um produto
+
 const create = (productData) => {
     return new Promise((resolve, reject) => {
-        const { nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, codigo } = productData;
-        const sql = 'INSERT INTO produto (nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, codigo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        db.run(sql, [nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, codigo], function(err) {
+        // Agora inclui o modelo_3d
+        const { nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, modelo_3d, codigo } = productData;
+        
+        const sql = 'INSERT INTO produto (nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, modelo_3d, codigo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        
+        // Adiciona o novo parâmetro
+        const params = [nome, quantidade, tamanho, cor, categoria, preco, descricao, foto, modelo_3d, codigo];
+
+        db.run(sql, params, function(err) {
             if (err) return reject(err);
             resolve({ id: this.lastID, codigo });
         });
     });
 };
-
 module.exports = {
     findByCategory,
     findById,

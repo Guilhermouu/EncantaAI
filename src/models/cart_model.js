@@ -4,7 +4,7 @@ const findAll = () => {
     return new Promise((resolve, reject) => {
         const sql = `
             SELECT c.id as carrinho_id, p.id, p.nome, p.preco, p.foto, c.quantidade
-            FROM carrinho c JOIN produto p ON c.produto_id = p.id
+            FROM carrinho_item c JOIN produto p ON c.produto_id = p.id
         `;
         db.all(sql, [], (err, rows) => {
             if (err) return reject(err);

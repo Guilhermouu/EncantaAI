@@ -17,7 +17,8 @@ const upload = multer({ storage: storage });
 const authController = require('../controllers/auth_controllers')
 const productController = require('../controllers/product_controller')
 const cartController = require('../controllers/cart_controller')
-const employeeController= require('../controllers/employee_controller')
+const employeeController= require('../controllers/employee_controller');
+const { create } = require('domain');
 
 // ROTAS DE AUTENTICAÇÃO ===
 router.post('/api/cadastro', authController.registerClient); 
@@ -25,7 +26,6 @@ router.post('/api/login', authController.loginClient);
 
 // ROTAS DE CARRINHO ===
 router.post('/api/produto', productController.getProductsByCategory);
-// router.post('/api/produto/administrador', productController.upload.single("foto"))
 
 // === ROTAS DE CARRINHO ===
 router.get('/carrinho', cartController.viewCart);
@@ -33,7 +33,19 @@ router.get('/carrinho', cartController.viewCart);
 
 // === ROTAS DE FUNCIONÁRIO ===
 router.post('/api/cadastro-funcionario', employeeController.registerEmployee);
+router.post('/api/login-cargo', employeeController.loginEmployee)
 // ...
+
+// === ROTAS DE PRODUTO ===
+router.post(
+    "/api/produto/administrador", 
+    upload.fields([
+        { name: 'foto', maxCount: 1 },
+        { name: 'modelo_3d', maxCount: 1 }
+    ]), 
+    productController.createProduct
+);
+
 
 // Exporta o router para ser usado no server.js principal
 module.exports = router;

@@ -56,18 +56,22 @@ const getProductColors = async (req, res) => {
 const createProduct = async (req, res) => {
     try {
         const { nome, quantidade, tamanho, cor, categoria, preco, descricao } = req.body;
-        if (!nome || !quantidade || !tamanho || !cor || !categoria || !preco || !descricao || !req.file) {
-            return res.status(400).json({ message: "Todos os campos obrigatórios devem ser preenchidos." });
+        
+        // Validação básica no back-end
+        if (!nome || !quantidade || !tamanho || !cor || !categoria || !preco || !req.files.foto) {
+            return res.status(400).json({ message: "Campos obrigatórios, incluindo a imagem JPG, devem ser preenchidos." });
         }
         
         const productData = {
             ...req.body,
-            foto: req.file.buffer,
+            foto: req.files.foto[0].buffer, // Pega o buffer do arquivo 'foto'
+            modelo_3d: req.files.modelo_3d ? req.files.modelo_3d[0].buffer : null, // Pega o buffer do 'modelo_3d' se existir
             codigo: "PRD-" + Date.now()
         };
 
         const newProduct = await ProductModel.create(productData);
         res.status(201).json({ message: "Produto cadastrado com sucesso!", produtoId: newProduct.id, codigo: newProduct.codigo });
+
     } catch (error) {
         console.error("Erro ao cadastrar produto:", error.message);
         res.status(500).json({ message: "Erro ao cadastrar produto." });
