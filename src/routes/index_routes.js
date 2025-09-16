@@ -34,6 +34,8 @@ router.get('/carrinho', cartController.viewCart);
 // === ROTAS DE FUNCIONÁRIO ===
 router.post('/api/cadastro-funcionario', employeeController.registerEmployee);
 router.post('/api/login-cargo', employeeController.loginEmployee)
+router.post('/api/gestao-usuario', employeeController.createUserByAdmin)
+
 // ...
 
 // === ROTAS DE PRODUTO ===
@@ -45,7 +47,6 @@ router.post(
     ]), 
     productController.createProduct
 );
-
 
 // Exporta o router para ser usado no server.js principal
 module.exports = router;

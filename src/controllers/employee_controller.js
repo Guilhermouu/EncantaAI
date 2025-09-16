@@ -47,8 +47,42 @@ const loginEmployee = async (req, res) => {
         return res.status(500).json({ message: "Erro interno do servidor" });
     }
 };
+const createUserByAdmin = async (req, res) => {
+    // MUDANÇA: Removidos email e telefone da desestruturação
+    const { nome, cpf, senha, cargo } = req.body;
 
+    // Validação de back-end
+    if (!nome || !cpf || !senha || !cargo) {
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios: nome, cpf, senha e cargo.' });
+    }
+
+    try {
+        const existingByCpf = await EmployeeModel.findByCpf(cpf.replace(/\D/g, ''));
+        if (existingByCpf) {
+            return res.status(409).json({ message: 'Este CPF já está cadastrado.' });
+        }
+        
+        // MUDANÇA: Verificação de e-mail removida
+
+        const hashedPassword = await bcrypt.hash(senha, 10);
+        
+        const employeeData = {
+            nome,
+            cpf: cpf.replace(/\D/g, ''),
+            hashedPassword,
+            cargo: cargo.toUpperCase()
+        };
+        
+        await EmployeeModel.create(employeeData);
+        res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error.message);
+        res.status(500).json({ message: 'Erro interno do servidor.' });
+    }
+};
 module.exports = {
     registerEmployee,
     loginEmployee,
+    createUserByAdmin
 };
