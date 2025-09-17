@@ -18,7 +18,7 @@ document.getElementById('formulario-login').addEventListener('submit', async fun
         if ( data.cargo === 'ADMINISTRADOR') {
             window.location.href = 'painel-administrador.html';
             alert('Login bem-sucedido! Redirecionando para a tela de administrador.');
-        } else if (data.cargo === 'FUNCIONÁRIO') {
+        } else if (data.cargo === 'FUNCIONARIO') {
             window.location.href = 'painel-funcionario.html';
         } else {
             alert('Cargo não reconhecido!');

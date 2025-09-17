@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const multer = require("multer");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const relatorioController = require('../controllers/relatorio_controller');
 
 // Importa a conexão do banco de dados já configurada
 const db = require('../config/database');
@@ -36,8 +37,6 @@ router.post('/api/cadastro-funcionario', employeeController.registerEmployee);
 router.post('/api/login-cargo', employeeController.loginEmployee)
 router.post('/api/gestao-usuario', employeeController.createUserByAdmin)
 
-
-
 // === ROTAS DE PRODUTO ===
 router.post(
     "/api/produto/administrador", 
@@ -54,5 +53,7 @@ router.get('/api/produtos/search', productController.searchProducts);
 // ROTA PARA ATUALIZAR UM PRODUTO POR ID
 router.put('/api/produtos/:id', productController.updateProduct);
 
+// ROTA PARA RELATÓRIOS
+router.get('/api/relatorios/vendas', relatorioController.getRelatorioVendas);
 // Exporta o router para ser usado no server.js principal
 module.exports = router;
