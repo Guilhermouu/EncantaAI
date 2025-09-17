@@ -14,7 +14,7 @@ const findById = (id) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM produto WHERE id = ?';
         db.get(sql, [id], (err, row) => {
-            if (err) return reject(err);
+            if (err) return reject (err);
             resolve(row);
         });
     });
@@ -56,10 +56,39 @@ const create = (productData) => {
         });
     });
 };
+
+const findByName = (name) => {
+    return new Promise((resolve, reject) => {
+        // O '%' é um coringa que busca nomes que contenham o termo pesquisado
+        const sql = 'SELECT * FROM produto WHERE nome LIKE ?';
+        db.all(sql, [`%${name}%`], (err, rows) => {
+            if (err) return reject(err);
+            resolve(rows);
+        });
+    });
+};
+
+const update = (id, productData) => {
+    return new Promise((resolve, reject) => {
+        const { nome, quantidade, tamanho, cor, categoria, preco, descricao } = productData;
+        const sql = `
+            UPDATE produto 
+            SET nome = ?, quantidade = ?, tamanho = ?, cor = ?, categoria = ?, preco = ?, descricao = ?
+            WHERE id = ?
+        `;
+        const params = [nome, quantidade, tamanho, cor, categoria, preco, descricao, id];
+        db.run(sql, params, function(err) {
+            if (err) return reject(err);
+            resolve({ changes: this.changes });
+        });
+    });
+};
 module.exports = {
     findByCategory,
     findById,
     findPhotoById,
     findColorsByName,
     create,
+    findByName,
+    update,
 };

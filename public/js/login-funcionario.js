@@ -15,10 +15,10 @@ document.getElementById('formulario-login').addEventListener('submit', async fun
     const data = await response.json();
 
     if (response.ok) {
-        if (data.cargo === 'Administrador') {
+        if ( data.cargo === 'ADMINISTRADOR') {
             window.location.href = 'painel-administrador.html';
             alert('Login bem-sucedido! Redirecionando para a tela de administrador.');
-        } else if (data.cargo === 'funcionário' || data.cargo === 'Funcionario') {
+        } else if (data.cargo === 'FUNCIONÁRIO') {
             window.location.href = 'painel-funcionario.html';
         } else {
             alert('Cargo não reconhecido!');

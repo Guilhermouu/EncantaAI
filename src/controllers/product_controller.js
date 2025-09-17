@@ -78,10 +78,41 @@ const createProduct = async (req, res) => {
     }
 };
 
+const searchProducts = async (req, res) => {
+    try {
+        const { nome } = req.query; 
+        if (!nome) {
+            return res.status(400).json({ message: 'O termo de busca (nome) é obrigatório.' });
+        }
+        const products = await ProductModel.findByName(nome);
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar produtos.' });
+    }
+};
+
+const updateProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const productData = req.body;
+        
+        const result = await ProductModel.update(id, productData);
+
+        if (result.changes === 0) {
+            return res.status(404).json({ message: 'Produto não encontrado para atualização.' });
+        }
+        res.status(200).json({ message: 'Produto atualizado com sucesso!' });
+    } catch (error) {
+        console.error("Erro ao atualizar produto:", error.message);
+        res.status(500).json({ message: 'Erro interno do servidor.' });
+    }
+};
 module.exports = {
     getProductsByCategory,
     getProductById,
     getProductPhoto,
-    getProductColors,
+    getProductColors, 
+    searchProducts,
+    updateProduct,
     createProduct,
 };

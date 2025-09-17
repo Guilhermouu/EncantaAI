@@ -36,7 +36,7 @@ router.post('/api/cadastro-funcionario', employeeController.registerEmployee);
 router.post('/api/login-cargo', employeeController.loginEmployee)
 router.post('/api/gestao-usuario', employeeController.createUserByAdmin)
 
-// ...
+
 
 // === ROTAS DE PRODUTO ===
 router.post(
@@ -47,6 +47,12 @@ router.post(
     ]), 
     productController.createProduct
 );
+
+// ROTA PARA BUSCAR PRODUTOS POR NOME
+router.get('/api/produtos/search', productController.searchProducts);
+
+// ROTA PARA ATUALIZAR UM PRODUTO POR ID
+router.put('/api/produtos/:id', productController.updateProduct);
 
 // Exporta o router para ser usado no server.js principal
 module.exports = router;
