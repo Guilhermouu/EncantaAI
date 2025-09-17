@@ -32,6 +32,7 @@ const getProductPhoto = async (req, res) => {
     try {
         const { id } = req.params;
         const result = await ProductModel.findPhotoById(id);
+        
         if (!result || !result.foto) {
             return res.status(404).send('Imagem não encontrada');
         }

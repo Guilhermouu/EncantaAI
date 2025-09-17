@@ -53,6 +53,9 @@ router.get('/api/produtos/search', productController.searchProducts);
 // ROTA PARA ATUALIZAR UM PRODUTO POR ID
 router.put('/api/produtos/:id', productController.updateProduct);
 
+// ROTA PARA FOTOS DOS PRODUTOS ID
+router.get('/api/produto/:id/foto', productController.getProductPhoto);
+
 // ROTA PARA RELATÓRIOS
 router.get('/api/relatorios/vendas', relatorioController.getRelatorioVendas);
 // Exporta o router para ser usado no server.js principal
