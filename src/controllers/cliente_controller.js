@@ -35,7 +35,47 @@ const getClienteById = async (req, res) => {
     }
 };
 
+const deleteCliente = async (req, res) => {
+    try {
+        // ATENÇÃO: Em um projeto real, aqui haveria uma validação de token
+        // para garantir que o usuário só pode deletar a si mesmo.
+        const { id } = req.params;
+        const result = await ClienteModel.remove(id);
+        if (result.changes === 0) return res.status(404).json({ message: 'Cliente não encontrado.' });
+        res.status(200).json({ message: 'Conta cancelada com sucesso.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao cancelar a conta.' });
+    }
+};
+
+const updateCliente = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nome, email, senha, cpf, cep, rua, numero, bairro, cidade, estado, complemento } = req.body;
+        
+        let hashedPassword = null;
+        // Se uma nova senha foi enviada, criptografa-a
+        if (senha) {
+            hashedPassword = await bcrypt.hash(senha, 10);
+        }
+
+        const clienteData = { nome, email, hashedPassword, cpf, cep, rua, numero, bairro, cidade, estado, complemento };
+        
+        const result = await ClienteModel.update(id, clienteData);
+
+        if (result.changes === 0) {
+            return res.status(404).json({ message: 'Cliente não encontrado para atualização.' });
+        }
+        res.status(200).json({ message: 'Informações atualizadas com sucesso!' });
+    } catch (error) {
+        console.error("Erro ao atualizar cliente:", error.message);
+        res.status(500).json({ message: 'Erro interno do servidor.' });
+    }
+};
+
 module.exports = {
     getAllClientes,
     getClienteById,
+    deleteCliente,
+    updateCliente
 };

@@ -62,7 +62,7 @@ const loginClient = async (req, res) => {
         }
         const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
         if (senhaCorreta) {
-            res.status(200).json({ message: "Login bem-sucedido", nome: usuario.email });
+            res.status(200).json({ message: "Login bem-sucedido", nome: usuario.nome, id: usuario.id});
         } else {
             res.status(401).json({ message: "Senha incorreta" });
         }

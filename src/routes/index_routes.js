@@ -61,6 +61,7 @@ router.get('/api/produto/:id/foto', productController.getProductPhoto);
 // --- ROTAS DE GESTÃO DE CLIENTES (ADMIN) ---
 router.get('/api/clientes', clienteController.getAllClientes);
 router.get('/api/clientes/:id', clienteController.getClienteById);
+router.put('/api/clientes/:id', clienteController.updateCliente);
 
 // ROTA PARA RELATÓRIOS
 router.get('/api/relatorios/vendas', relatorioController.getRelatorioVendas);
@@ -70,5 +71,8 @@ router.get('/api/funcionarios', employeeController.getAllFuncionarios);        /
 router.get('/api/funcionarios/:id', employeeController.getFuncionarioById);      // Buscar um
 router.put('/api/funcionarios/:id', employeeController.updateFuncionario);      // Atualizar um
 router.delete('/api/funcionarios/:id', employeeController.deleteFuncionario);  // Deletar um
+
+// ROTAS PARA CLIENTES
+router.delete('/api/clientes/:id', clienteController.deleteCliente); // <-- ADICIONE ESTA LINHA
 // Exporta o router para ser usado no server.js principal
 module.exports = router;

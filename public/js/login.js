@@ -21,15 +21,13 @@ document.getElementById('login-form').addEventListener('submit', async function 
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', data.nome || email);
+            localStorage.setItem('userId', data.id); // <-- ADICIONE ESTA LINHA
             // Login bem-sucedido:
             mensagemDiv.textContent = data.message || "Login bem-sucedido!";
             mensagemDiv.className = 'mensagem sucesso';
-
-            // Armazena o status de login e o nome do usuário (se disponível) no localStorage
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userName', data.nome || email); // Assumindo que 'data.nome' pode vir da API
-
-          
+                      
             // Verifica se existe uma URL de redirecionamento salva no localStorage
             const redirectTo = localStorage.getItem('redirectAfterLogin');
 

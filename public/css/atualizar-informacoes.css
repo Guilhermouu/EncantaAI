@@ -1,0 +1,14 @@
+/* Em: public/css/atualizar-informacoes.css */
+.main-container { max-width: 800px; margin: 40px auto; padding: 20px; }
+.main-container h2 { text-align: center; font-size: 24px; margin-bottom: 30px; }
+#update-form fieldset { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 20px; }
+#update-form legend { font-weight: 600; padding: 0 10px; }
+.form-group { display: flex; flex-direction: column; width: 100%; }
+.form-group-half { width: calc(50% - 10px); }
+.form-group-third { width: calc(33.33% - 14px); }
+.form-group-two-thirds { width: calc(66.66% - 14px); }
+.form-group label { margin-bottom: 8px; font-size: 14px; }
+.form-group input, .form-group textarea { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+.form-actions { text-align: center; margin-top: 20px; }
+.btn-update { background-color: #28a745; color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+.btn-update:hover { background-color: #218838; }

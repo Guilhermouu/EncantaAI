@@ -34,8 +34,42 @@ const countPedidosByClienteId = (clienteId) => {
     });
 };
 
+const remove = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM cliente WHERE id = ?';
+        db.run(sql, [id], function(err) {
+            if (err) return reject(err);
+            resolve({ changes: this.changes });
+        });
+    });
+};
+
+const update = (id, clienteData) => {
+    return new Promise((resolve, reject) => {
+        const { nome, email, hashedPassword, cpf, cep, rua, numero, bairro, cidade, estado, complemento } = clienteData;
+
+        // Monta a query para atualizar a senha apenas se uma nova for fornecida
+        let sql = 'UPDATE cliente SET nome = ?, email = ?, cpf = ?, cep = ?, rua = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, complemento = ?';
+        const params = [nome, email, cpf, cep, rua, numero, bairro, cidade, estado, complemento];
+
+        if (hashedPassword) {
+            sql += ', senha = ?';
+            params.push(hashedPassword);
+        }
+
+        sql += ' WHERE id = ?';
+        params.push(id);
+
+        db.run(sql, params, function(err) {
+            if (err) return reject(err);
+            resolve({ changes: this.changes });
+        });
+    });
+};
 module.exports = {
     findAll,
     findById,
     countPedidosByClienteId,
+    remove,
+    update
 };
