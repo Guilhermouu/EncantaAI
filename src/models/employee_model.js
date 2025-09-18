@@ -37,8 +37,68 @@ const findByEmail = (email) => {
         });
     });
 };
+// NOVA FUNÇÃO: para listar todos os funcionários
+const findAll = () => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT id, nome, cargo FROM funcionario';
+        db.all(sql, [], (err, rows) => {
+            if (err) return reject(err);
+            resolve(rows);
+        });
+    });
+};
+
+// NOVA FUNÇÃO: para buscar um funcionário por ID (sem a senha)
+const findById = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT id, nome, cpf, cargo FROM funcionario WHERE id = ?';
+        db.get(sql, [id], (err, row) => {
+            if (err) return reject(err);
+            resolve(row);
+        });
+    });
+};
+
+// NOVA FUNÇÃO: para atualizar um funcionário
+const update = (id, employeeData) => {
+    return new Promise((resolve, reject) => {
+        const { nome, cpf, cargo, hashedPassword } = employeeData;
+        
+        // Monta a query dinamicamente para atualizar a senha apenas se ela for fornecida
+        let sql = 'UPDATE funcionario SET nome = ?, cpf = ?, cargo = ?';
+        const params = [nome, cpf, cargo];
+
+        if (hashedPassword) {
+            sql += ', senha = ?';
+            params.push(hashedPassword);
+        }
+
+        sql += ' WHERE id = ?';
+        params.push(id);
+
+        db.run(sql, params, function(err) {
+            if (err) return reject(err);
+            resolve({ changes: this.changes });
+        });
+    });
+};
+
+// NOVA FUNÇÃO: para remover um funcionário
+const remove = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM funcionario WHERE id = ?';
+        db.run(sql, [id], function(err) {
+            if (err) return reject(err);
+            resolve({ changes: this.changes });
+        });
+    });
+};
 module.exports = {
     findByCpf,
     create,
-    findByEmail
+    findByEmail,
+    findAll,
+    findById,
+    update,
+    remove
 };

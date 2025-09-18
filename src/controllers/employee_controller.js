@@ -47,6 +47,7 @@ const loginEmployee = async (req, res) => {
         return res.status(500).json({ message: "Erro interno do servidor" });
     }
 };
+
 const createUserByAdmin = async (req, res) => {
     // MUDANÇA: Removidos email e telefone da desestruturação
     const { nome, cpf, senha, cargo } = req.body;
@@ -81,8 +82,65 @@ const createUserByAdmin = async (req, res) => {
         res.status(500).json({ message: 'Erro interno do servidor.' });
     }
 };
+const getAllFuncionarios = async (req, res) => {
+    try {
+        const funcionarios = await EmployeeModel.findAll();
+        res.status(200).json(funcionarios);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar funcionários.' });
+    }
+};
+
+// NOVA FUNÇÃO: para buscar um funcionário por ID
+const getFuncionarioById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const funcionario = await EmployeeModel.findById(id);
+        if (!funcionario) return res.status(404).json({ message: 'Funcionário não encontrado.' });
+        res.status(200).json(funcionario);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar funcionário.' });
+    }
+};
+
+// NOVA FUNÇÃO: para atualizar um funcionário
+const updateFuncionario = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nome, cpf, cargo, senha } = req.body;
+
+        let hashedPassword = null;
+        if (senha) {
+            hashedPassword = await bcrypt.hash(senha, 10);
+        }
+
+        const result = await EmployeeModel.update(id, { nome, cpf, cargo, hashedPassword });
+
+        if (result.changes === 0) return res.status(404).json({ message: 'Funcionário não encontrado.' });
+        res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao atualizar usuário.' });
+    }
+};
+
+// NOVA FUNÇÃO: para deletar um funcionário
+const deleteFuncionario = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await EmployeeModel.remove(id);
+        if (result.changes === 0) return res.status(404).json({ message: 'Funcionário não encontrado.' });
+        res.status(200).json({ message: 'Usuário excluído com sucesso!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao excluir usuário.' });
+    }
+};
+
 module.exports = {
     registerEmployee,
     loginEmployee,
-    createUserByAdmin
+    createUserByAdmin,
+    getAllFuncionarios,
+    getFuncionarioById,
+    updateFuncionario,
+    deleteFuncionario
 };

@@ -7,6 +7,8 @@ const multer = require("multer");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const relatorioController = require('../controllers/relatorio_controller');
+const clienteController = require('../controllers/cliente_controller');
+
 
 // Importa a conexão do banco de dados já configurada
 const db = require('../config/database');
@@ -56,7 +58,17 @@ router.put('/api/produtos/:id', productController.updateProduct);
 // ROTA PARA FOTOS DOS PRODUTOS ID
 router.get('/api/produto/:id/foto', productController.getProductPhoto);
 
+// --- ROTAS DE GESTÃO DE CLIENTES (ADMIN) ---
+router.get('/api/clientes', clienteController.getAllClientes);
+router.get('/api/clientes/:id', clienteController.getClienteById);
+
 // ROTA PARA RELATÓRIOS
 router.get('/api/relatorios/vendas', relatorioController.getRelatorioVendas);
+
+// ROTAS PARA GESTÃO DE FUNCIONÁRIOS (CRUD COMPLETO)
+router.get('/api/funcionarios', employeeController.getAllFuncionarios);        // Listar todos
+router.get('/api/funcionarios/:id', employeeController.getFuncionarioById);      // Buscar um
+router.put('/api/funcionarios/:id', employeeController.updateFuncionario);      // Atualizar um
+router.delete('/api/funcionarios/:id', employeeController.deleteFuncionario);  // Deletar um
 // Exporta o router para ser usado no server.js principal
 module.exports = router;

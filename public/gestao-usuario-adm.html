@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Usuário</title>
+    <link rel="stylesheet" href="css/gestao-usuario-adm.css">
+</head>
+
+<body>
+    <header>
+        <nav class="header-container"> 
+            <img src="assets/images/logo.png" alt="Logo Controversy" class="logo">
+        </nav>
+    </header>
+
+<div class="user-management-section">
+        <div class="user-management-title">
+            <span>Gestão de Usuário</span>
+        </div>
+        <div class="user-list-container" id="user-list-container">
+             <!--Modelo da div com cada card de funcionário pesquisado-->
+            <div class="user-card">
+                <div class="user-info">
+                    
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Exemplo" class="user-icon">
+                    <div class="user-text">
+                        <p class="user-name">Nome exemplo</p>
+                        <p class="user-profile">Perfil: EXEMPLO</p>
+                    </div>
+                </div>
+
+                
+                <a class="excluir">Excluir</a>
+                <!--Aqui colocaria a função para atualizar o funcionário -->
+                <button class="btn btn-update" onclick="atualizar()">ATUALIZAR</button>
+            </div>
+            
+            </div>
+
+        <div class="user-management-buttons">
+            <button class="btn btn-back" onclick="voltar()">VOLTAR</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+
+      <!-- Informações do Footer -->
+      <div class="footer-info">
+        <h3>EncantAI • Estilo em Todos os Momentos</h3>
+        <p>
+          Na EncantAI você encontra peças que valorizam seu estilo com elegância e autenticidade.<br>
+          Vista sua melhor versão.<br>
+          Vista EncantAI.
+        </p>
+        <span>© 2024 - 2025 EncantAI</span>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <!-- Contato do Footer -->
+      <div class="footer-contato">
+        <h3>Contatos</h3>
+        <p>Email: <a href="mailto:encantai@gmail.com">encantai@gmail.com</a></p>
+        <hr>
+        <p>Instagram: <a href = "https://www.instagram.com/encantai_br?igsh=bmN0cXhnd3drZmNn">encantai_br</a></p>
+        <hr>
+      </div>
+
+    </div>
+  </footer>
+      <script src="js/gestao-usuario-adm.js" defer></script>
+</body>
+</html>

@@ -17,9 +17,9 @@
 
 :root {
     --preto: #000;
-    --branco: #fff;
+    --branco: #764A54;
     --dourado: #C3971E; 
-    --cinzaClaro: #ccc;
+    --cinzaClaro: #764A54;
     --pretoVariante:#000000CC;
     --cinzaVariante:#5B5B5B;
     --azulChamativo:#0080FF;
@@ -86,9 +86,9 @@ header {
 .menu-bar {
   width: 79%;
   height: 5px;
-  background-color: white;
+  background-color: #764A54;
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-  opacity: 0.6;
+  opacity: 0.9;
 }
 .menu-container.open .menu-bar:nth-child(1) {
   transform: rotate(40deg) translateY(230%);
@@ -100,7 +100,7 @@ header {
   transform: rotate(-40deg) translateY(-230%);
 }
 .menu-texto {
-  color: white;
+  color: #764A54;
   font-family: Harmattan;
   font-size: 1.5vw;
   padding-top: 3px;
@@ -114,7 +114,8 @@ header {
   height: calc(100% - 7vw);
   left: -100%;
   width: 30%;
-  background: #000;
+
+background: linear-gradient(180deg, rgba(225, 168, 174, 1) 0%, rgba(245, 242, 237, 1) 50%, rgba(200, 207, 189, 1) 100%);
   padding: 2rem 1.5rem;
   transition: left 0.4s ease-in-out, background-color 0.1s ease;
 }
@@ -127,7 +128,7 @@ header {
   padding-bottom: 1rem;
 }
 .barra-lateral ul li a {
-  color: #fff;
+  color: #764A54;
   text-decoration: none;
   font-family: Harmattan;
   font-size: 2vw;
@@ -136,20 +137,21 @@ header {
   transition: text-decoration-color 300ms;
 }
 .barra-lateral ul li a:hover {
-  text-decoration: underline 1px white;
+  text-decoration: underline 1px #764A54;
 }
 .barra-lateral::-webkit-scrollbar {
   width: 8px;
 }
 .barra-lateral::-webkit-scrollbar-track {
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 .barra-lateral::-webkit-scrollbar-thumb {
-  background-color: gray;
+
+background: linear-gradient(180deg, rgba(225, 168, 174, 1) 0%, rgba(245, 242, 237, 1) 50%, rgba(200, 207, 189, 1) 100%);
   border-radius: 4px;
 }
 .barra-lateral::-webkit-scrollbar-thumb:hover {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 /* Quando aberto, desloca para 0 */
 .menu-container.open ~ .barra-lateral {
@@ -177,21 +179,26 @@ header {
      - Usuário e Carrinho
 ------------------------------------*/
 .lupa {
+  filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
   width: 40px;
   height: 40px;
   cursor: pointer;
-  transition: opacity 0.5s ease;
+
 }
 .carrinho-area {
+    filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
     display: flex;
     justify-content: end;
 }
   
 .area-direita {
+  filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
     display: flex;
 }
 
 .usuario_icone{
+    filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
+    opacity: 0.9;
     height: 40px;
     width: 40px;
     padding-right: 10px;
@@ -216,7 +223,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.80);
+  background: linear-gradient(180deg, rgba(225, 168, 174, 0.5) 0%, rgba(245, 242, 237, 0.5) 50%, rgba(200, 207, 189, 0.5) 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -240,7 +247,7 @@ header.search-open .area-direita {
   transition: opacity 0.5s ease;
 }
 header.search-open {
-  background: rgba(0, 0, 0, 0.90);
+  background: linear-gradient(180deg, rgba(225, 168, 174, 1) 0%, rgba(245, 242, 237, 1) 50%, rgba(200, 207, 189, 1) 100%);
   box-shadow: none;
   transition: all 0.5s ease;
 }
@@ -269,14 +276,15 @@ header.search-open .logo {
   padding-left: 4vw;
   padding-right: 4vw;
   border-radius: 20px;
-  border: 3px solid rgba(230, 230, 230, 0.384);
+  border: 3px solid rgba(130, 160, 110, 0.384);
   background: transparent;
-  color: #fff;
+  color: #764A54;
   font-family: 'Hammersmith One', sans-serif;
   font-size: 1.5vw;
   outline: none;
 }
 .barra-pesquisa .lupa-input {
+  filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
   position: absolute;
   left: 1vw;
   top: 50%;
@@ -288,6 +296,8 @@ header.search-open .logo {
 }
 /* X estático dentro da barra de pesquisa */
 .barra-pesquisa .simples-x {
+  filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
+
   position: absolute;
   right: 1vw;
   top: 50%;
@@ -300,6 +310,7 @@ header.search-open .logo {
 
 .barra-pesquisa .simples-x::before,
 .barra-pesquisa .simples-x::after {
+
   content: "";
   position: absolute;
   top: 50%;
@@ -307,7 +318,6 @@ header.search-open .logo {
   width: 100%;
   height: 0.25vw;
   background-color:white ;
-  opacity: 0.6;
   transform-origin: center;
 }
 
@@ -323,6 +333,7 @@ header.search-open .logo {
 
 
 .simples-x-fechar{
+  filter: invert(33%) sepia(18%) saturate(924%) hue-rotate(296deg) brightness(88%) contrast(87%);
   position: absolute;
   right: 1vw;
   top: -200%;
@@ -335,6 +346,7 @@ header.search-open .logo {
 
 .simples-x-fechar::before,
 .simples-x-fechar::after {
+  
   content: "";
   position: absolute;
   width: 100%;
@@ -345,6 +357,7 @@ header.search-open .logo {
 
 /* diagonal principal */
 .simples-x-fechar::before {
+  
   transform: translateY(-50%) rotate(45deg);
 }
 
@@ -357,6 +370,8 @@ header.search-open .logo {
 /*------------------------------------
   9. Categorias Menu
 ------------------------------------*/
+/* --- MENU SUPERIOR (CATEGORIAS) --- */
+/* --- MENU SUPERIOR (CATEGORIAS) --- */
 .categorias-menu ul {
   display: flex;
   justify-content: center;
@@ -365,18 +380,81 @@ header.search-open .logo {
   margin: 1vw 0;
   padding: 0;
 }
+
 .categorias-menu li a {
   color: #fff;
   font-family: 'Hammersmith One', sans-serif;
-  font-size: 1.3vw;
+  font-size: 1.5vw; /* << AUMENTADO */
   text-transform: uppercase;
   text-decoration: none;
   transition: color 0.3s;
 }
+
 .categorias-menu li a:hover {
-  color: #bfa463;
+  color: #764A54;
 }
 
+
+/* --- BARRA LATERAL (MENU HAMBÚRGUER) --- */
+.barra-lateral {
+  box-sizing: border-box;
+  padding-bottom: 50px; 
+}
+
+
+/* --- SEÇÃO "TRABALHE CONOSCO" (DENTRO DA BARRA LATERAL) --- */
+.trabalhe-conosco-sidebar {
+  border-top: 1px solid rgba(118, 74, 84, 0.4);
+  margin-top: 25px;
+  padding: 25px 15px 0;
+  text-align: center;
+}
+
+.trabalhe-conosco-sidebar p {
+  color: #764A54;
+  font-family: 'Harmattan', sans-serif;
+  font-size: 1.1rem; /* << AUMENTADO */
+  margin: 0 0 8px 0;
+}
+
+.trabalhe-conosco-sidebar a {
+  color: #764A54;
+  font-family: 'Harmattan', sans-serif;
+  font-size: 1.3rem; /* << AUMENTADO */
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+/* --- EFEITO HOVER PARA LINKS DA BARRA LATERAL --- */
+/* (A fonte aqui também foi aumentada para consistência) */
+.barra-lateral ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: #764A54;
+  text-decoration: none;
+  font-size: 1.4rem; /* << AUMENTADO */
+  transition: background-color 0.3s;
+}
+
+.barra-lateral ul li a:hover {
+  background-color: rgba(118, 74, 84, 0.08);
+}
+/* --- EFEITO HOVER PARA LINKS DA BARRA LATERAL --- */
+/* Estilo base para os links da lista */
+.barra-lateral ul li a {
+  display: block;
+  padding: 12px 20px;
+  color: #764A54;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+/* Efeito ao passar o mouse */
+.barra-lateral ul li a:hover {
+  background-color: rgba(118, 74, 84, 0.08);
+}
 /*------------------------------------
  10. Mais Vendido
 ------------------------------------*/
@@ -386,7 +464,7 @@ header.search-open .logo {
 .mais-vendido h2 {
   font-family: 'Hammersmith One', sans-serif;
   font-size: 2.5vw;
-  color: #fff;
+  color: #764A54;
 }
 .card-container {
   display: flex;
@@ -394,9 +472,10 @@ header.search-open .logo {
   gap: 2vw;
 }
 .card {
+  
   position: relative;
   width: 100%;
-  background-color: #1a1a1a;
+  
   border-radius: 0.5vw;
   overflow: hidden;
   transition: transform 0.3s;
@@ -410,14 +489,14 @@ header.search-open .logo {
 .product-name {
   font-family: Harmattan;
   font-size: 1vw;
-  color: #fff;
+  color: #764A54;
   margin: 1vw 0;
 }
 .star-icon {
   position: absolute;
   top: 1vw;
   right: 1vw;
-  color: #bfa463;
+  color: #A6B391;
   font-size: 1.5vw;
 }
 
