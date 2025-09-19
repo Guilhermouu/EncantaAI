@@ -2,24 +2,44 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Criar Manequim</title>
+  <title>Criar Manequim - EncantaAI</title>
   <link rel="stylesheet" href="css/criar-manequim.css">
 </head>
 <body>
-  <div class="box">
-    <h2>Criar Seu Manequim</h2>
-    <p>1. Clique no botão abaixo para criar seu manequim no Ready Player Me:</p>
-    <a href="https://readyplayer.me/avatar" target="_blank">
-      <button>Abrir Criador de Avatar</button>
-    </a>
+    <header class="header-container">
+        <a href="/index.html"><img src="assets/images/logo.png" alt="Logo EncantaAI" class="logo"></a>
+    </header>
 
-    <p>2. Cole a URL do seu manequim aqui:</p>
-    <input type="text" id="urlManequim" placeholder="https://models.readyplayer.me/...glb">
+    <main>
+        <div class="box">
+            <h2>Criar Seu Manequim</h2>
+            <p>1. Clique no botão abaixo para criar seu manequim no Ready Player Me:</p>
+            <a href="https://readyplayer.me/avatar" target="_blank">
+                <button class="btn-primary">Abrir Criador de Avatar</button>
+            </a>
 
-    <button id="salvarBtn">Salvar Manequim</button>
+            <p>2. Cole a URL do seu manequim aqui:</p>
+            <input type="text" id="urlManequim" placeholder="https://models.readyplayer.me/...glb">
 
-    <p id="erro"></p>
-  </div>
-  <script src="js/criar_manequim.js"></script>
+            <button id="salvarBtn" class="btn-secondary">Salvar Manequim</button>
+
+            <p id="erro"></p>
+        </div>
+    </main>
+  
+    <footer class="footer-container">
+        <div class="footer-info">
+            <h3>EncantaAI • Estilo em Todos os Momentos</h3>
+            <p>Vista sua melhor versão. Vista EncantaAI.</p>
+            <span>© 2024 - 2025 EncantaAI</span>
+        </div>
+        <div class="footer-contato">
+            <h3>Contatos</h3>
+            <p>Email: <a href="mailto:contato.encantaai@gmail.com">contato.encantaai@gmail.com</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/encantaai_br">@encantaai_br</a></p>
+        </div>
+    </footer>
+
+    <script src="/js/criar_manequim.js"></script>
 </body>
 </html>
