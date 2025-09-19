@@ -27,12 +27,11 @@ const { create } = require('domain');
 router.post('/api/cadastro', authController.registerClient); 
 router.post('/api/login', authController.loginClient);
 
-// ROTAS DE CARRINHO ===
-router.post('/api/produto', productController.getProductsByCategory);
+// === ROTAS DE PRODUTO ===  <-- Comentário corrigido para clareza
+router.get('/api/produtos', productController.getProductsByCategory); 
 
 // === ROTAS DE CARRINHO ===
 router.get('/carrinho', cartController.viewCart);
-// ...
 
 // === ROTAS DE FUNCIONÁRIO ===
 router.post('/api/cadastro-funcionario', employeeController.registerEmployee);
